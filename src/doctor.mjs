@@ -26,7 +26,7 @@ export function diagnoseEnvIssues(env = process.env) {
       code: 'dual_anthropic_auth',
       message:
         'Both ANTHROPIC_API_KEY and ANTHROPIC_AUTH_TOKEN are set. Claude Code prefers ANTHROPIC_API_KEY and may hit Anthropic directly.',
-      fix: 'Use `npx bf16 claude` (which unsets ANTHROPIC_API_KEY automatically) or run `unset ANTHROPIC_API_KEY`.',
+      fix: 'Use `npx bf16ai claude` (which unsets ANTHROPIC_API_KEY automatically) or run `unset ANTHROPIC_API_KEY`.',
     });
   }
   if (env.ANTHROPIC_BASE_URL && /\/v1\/?$/.test(env.ANTHROPIC_BASE_URL.trim())) {
@@ -111,7 +111,7 @@ export async function runDoctor({ flagKey = null, json = false } = {}) {
 
   if (!resolved.key) {
     printWarn('Auth: No API key configured yet.');
-    printInfo(`Run ${c.cyan('npx bf16 login')} to sign in and claim $0.20 starter credit.`);
+    printInfo(`Run ${c.cyan('npx bf16ai login')} to sign in and claim $0.20 starter credit.`);
   } else if (meRes?.ok) {
     const avail = Number(meRes.data?.balance?.available_usd ?? 0);
     const tier = meRes.data?.tier?.name || `Tier ${meRes.data?.tier?.id ?? 0}`;
@@ -131,7 +131,7 @@ export async function runDoctor({ flagKey = null, json = false } = {}) {
     printErr(
       `Auth: ${maskApiKey(resolved.key)} (${resolved.source}) rejected — ${meRes?.error || 'unknown error'}`
     );
-    printInfo(`Re-authenticate with ${c.cyan('npx bf16 login')}`);
+    printInfo(`Re-authenticate with ${c.cyan('npx bf16ai login')}`);
     process.exitCode = 1;
   }
 

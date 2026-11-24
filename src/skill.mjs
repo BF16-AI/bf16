@@ -36,9 +36,9 @@ Use this skill when the user asks to:
 
 ## Quick CLI Commands
 
-- One-session Claude Code on bf16: \`npx bf16 claude\`
-- Live balance & diagnostics: \`npx bf16 doctor\`
-- Live latency benchmark: \`npx bf16 bench\`
+- One-session Claude Code on bf16: \`npx bf16ai claude\`
+- Live balance & diagnostics: \`npx bf16ai doctor\`
+- Live latency benchmark: \`npx bf16ai bench\`
 `;
 
 export const BF16_CURSOR_RULE_MDC = `---
@@ -150,11 +150,11 @@ export function runInstallSkill({
   console.log('');
   if (!withMcp) {
     printInfo(
-      `Want native MCP tool calls too? Run ${c.cyan('npx bf16 install-skill --mcp')}`
+      `Want native MCP tool calls too? Run ${c.cyan('npx bf16ai install-skill --mcp')}`
     );
   }
   if (manifest) {
-    printInfo(`Rollback anytime: ${c.cyan('npx bf16 undo')}`);
+    printInfo(`Rollback anytime: ${c.cyan('npx bf16ai undo')}`);
   }
   console.log('');
 }

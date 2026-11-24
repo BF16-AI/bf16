@@ -1,5 +1,5 @@
 {
-  "name": "bf16",
+  "name": "bf16ai",
   "version": "1.0.0",
   "description": "Official CLI for bf16.ai — run Claude Code, Codex, OpenCode, Goose, Pi, and local agents on uncensored 1M-context models with one command.",
   "license": "MIT",
@@ -14,6 +14,7 @@
     "url": "https://github.com/BF16-AI/bf16/issues"
   },
   "bin": {
+    "bf16ai": "bin/bf16.mjs",
     "bf16": "bin/bf16.mjs"
   },
   "files": [

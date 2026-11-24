@@ -276,7 +276,7 @@ test('statusline formatting and install/undo work cleanly', () => {
   try {
     const settingsPath = installClaudeStatusline({ homeDir: home });
     const parsed = JSON.parse(fs.readFileSync(settingsPath, 'utf8'));
-    assert.equal(parsed.statusLine.command, 'npx -y bf16 statusline');
+    assert.equal(parsed.statusLine.command, 'npx -y bf16ai statusline');
     const undone = restoreBackupSession(null, home);
     assert.equal(undone.ok, true);
     assert.equal(fs.existsSync(settingsPath), false);

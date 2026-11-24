@@ -143,7 +143,7 @@ export function installClaudeStatusline({ homeDir = os.homedir() } = {}) {
     ...existing,
     statusLine: {
       type: 'command',
-      command: 'npx -y bf16 statusline',
+      command: 'npx -y bf16ai statusline',
       padding: 0,
     },
   };
@@ -158,7 +158,7 @@ export async function runStatusline({ install = false, flagKey = null, homeDir =
     try {
       const target = installClaudeStatusline({ homeDir });
       printOk(`Updated ${c.dim(target)}`);
-      printInfo(`Undo anytime: ${c.cyan('npx bf16 undo')}`);
+      printInfo(`Undo anytime: ${c.cyan('npx bf16ai undo')}`);
     } catch (err) {
       printWarn(err.message);
       process.exitCode = 1;

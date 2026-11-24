@@ -37,7 +37,7 @@ export function commandExists(bin) {
 }
 
 export function buildCodexProfileToml(model = DEFAULT_FAST_MODEL) {
-  return `# Managed by bf16 CLI — undo anytime with: npx bf16 undo
+  return `# Managed by bf16 CLI — undo anytime with: npx bf16ai undo
 model = "${model}"
 model_provider = "bf16"
 model_context_window = 1048576
@@ -406,7 +406,7 @@ function readJsonOrEmpty(filePath) {
 /**
  * Safely writes isolated or merged client configs with automatic backup.
  * Never mutates the user's primary Claude/OpenCode defaults unless explicitly requested;
- * every touched file is backed up for `npx bf16 undo`.
+ * every touched file is backed up for `npx bf16ai undo`.
  */
 export function applySetupForClient({
   clientId,
@@ -424,7 +424,7 @@ export function applySetupForClient({
     return {
       clientId: 'codex',
       file: target,
-      runHint: 'codex --profile bf16  (or: npx bf16 codex)',
+      runHint: 'codex --profile bf16  (or: npx bf16ai codex)',
     };
   }
 
@@ -440,7 +440,7 @@ export function applySetupForClient({
     return {
       clientId: 'opencode',
       file: target,
-      runHint: 'npx bf16 opencode',
+      runHint: 'npx bf16ai opencode',
     };
   }
 
@@ -507,7 +507,7 @@ export function applySetupForClient({
     return {
       clientId: 'claude',
       file: null,
-      runHint: 'npx bf16 claude  (zero-touch — never overwrites ~/.claude/settings.json)',
+      runHint: 'npx bf16ai claude  (zero-touch — never overwrites ~/.claude/settings.json)',
     };
   }
 
@@ -515,7 +515,7 @@ export function applySetupForClient({
     return {
       clientId: 'goose',
       file: null,
-      runHint: 'npx bf16 goose',
+      runHint: 'npx bf16ai goose',
     };
   }
 
@@ -523,7 +523,7 @@ export function applySetupForClient({
     return {
       clientId: 'qwen-code',
       file: null,
-      runHint: 'npx bf16 qwen',
+      runHint: 'npx bf16ai qwen',
     };
   }
 
@@ -613,11 +613,11 @@ export async function runSetup({
   if (manifest) {
     printInfo(
       `Backup saved (${manifest.entries.length} file${manifest.entries.length === 1 ? '' : 's'}). ` +
-        `Rollback anytime: ${c.cyan('npx bf16 undo')}`
+        `Rollback anytime: ${c.cyan('npx bf16ai undo')}`
     );
   }
   printInfo(
-    `Optional: run ${c.cyan('npx bf16 statusline --install')} or ${c.cyan('npx bf16 install-skill')} for Claude Code.`
+    `Optional: run ${c.cyan('npx bf16ai statusline --install')} or ${c.cyan('npx bf16ai install-skill')} for Claude Code.`
   );
 }
 

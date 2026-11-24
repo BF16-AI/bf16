@@ -140,7 +140,7 @@ export async function runBench({
   );
   console.log('');
   printInfo(
-    `Launch fastest model in Claude Code: ${c.cyan(`npx bf16 claude --model ${bf16Models[0]}`)}`
+    `Launch fastest model in Claude Code: ${c.cyan(`npx bf16ai claude --model ${bf16Models[0]}`)}`
   );
   console.log('');
 }

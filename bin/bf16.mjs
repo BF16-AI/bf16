@@ -1,5 +1,7 @@
 #!/usr/bin/env node
 
+import fs from 'node:fs';
+import { fileURLToPath } from 'node:url';
 import { CLI_VERSION, DOCS_CLIENTS_URL } from '../src/constants.mjs';
 import { runLogin, runLogout, runReferral, runWhoami } from '../src/auth.mjs';
 import { launchClient, runSetup } from '../src/clients.mjs';
@@ -108,35 +110,35 @@ ${c.bold(c.cyan('bf16'))} ${c.dim(`v${CLI_VERSION}`)} — Uncensored 1M-context 
 Zero Data Retention · OpenAI + Anthropic + Responses APIs · $0.20 starter credit
 
 ${c.bold('ZERO-TOUCH LAUNCHERS')} ${c.dim('(never modifies your existing Claude/OpenCode configs)')}
-  ${c.cyan('npx bf16 claude')} [--fast|--pro|--model <id>]   Run Claude Code on bf16.ai (1M ctx)
-  ${c.cyan('npx bf16 codex')}  [--model <id>]                Run OpenAI Codex CLI (--profile bf16)
-  ${c.cyan('npx bf16 opencode')} [--model <id>]              Run OpenCode with isolated bf16.json
-  ${c.cyan('npx bf16 goose')}  [--model <id>]                Run Goose session on bf16.ai
-  ${c.cyan('npx bf16 pi')}     [--model <id>]                Run Pi Coding Agent on bf16.ai
-  ${c.cyan('npx bf16 qwen')}   [--model <id>]                Run Qwen Code on bf16.ai
+  ${c.cyan('npx bf16ai claude')} [--fast|--pro|--model <id>]   Run Claude Code on bf16.ai (1M ctx)
+  ${c.cyan('npx bf16ai codex')}  [--model <id>]                Run OpenAI Codex CLI (--profile bf16)
+  ${c.cyan('npx bf16ai opencode')} [--model <id>]              Run OpenCode with isolated bf16.json
+  ${c.cyan('npx bf16ai goose')}  [--model <id>]                Run Goose session on bf16.ai
+  ${c.cyan('npx bf16ai pi')}     [--model <id>]                Run Pi Coding Agent on bf16.ai
+  ${c.cyan('npx bf16ai qwen')}   [--model <id>]                Run Qwen Code on bf16.ai
 
 ${c.bold('SETUP & SAFE ROLLBACK')}
-  ${c.cyan('npx bf16 setup')} [client|all] [--dry-run]       Auto-detect agents & configure with backup
-  ${c.cyan('npx bf16 undo')}  [--list]                       Lossless rollback of setup/skill changes
-  ${c.cyan('npx bf16 statusline')} [--install]               Claude Code live balance & context status bar
-  ${c.cyan('npx bf16 install-skill')} [--client=all] [--mcp] Install uncensored sidecar Skill (+ MCP)
+  ${c.cyan('npx bf16ai setup')} [client|all] [--dry-run]       Auto-detect agents & configure with backup
+  ${c.cyan('npx bf16ai undo')}  [--list]                       Lossless rollback of setup/skill changes
+  ${c.cyan('npx bf16ai statusline')} [--install]               Claude Code live balance & context status bar
+  ${c.cyan('npx bf16ai install-skill')} [--client=all] [--mcp] Install uncensored sidecar Skill (+ MCP)
 
 ${c.bold('ACCOUNT, DIAGNOSTICS & TOOLS')}
-  ${c.cyan('npx bf16 login')} [--key <sk-...>] [--ref=<code>] Browser OAuth or API key login (0600)
-  ${c.cyan('npx bf16 whoami')} / ${c.cyan('balance')} [--json]             Check live USD balance, tier & concurrency
-  ${c.cyan('npx bf16 doctor')} [--json]                      Diagnose API key, latency & env conflicts
-  ${c.cyan('npx bf16 bench')}  [--models=...] [--compare]    Measure real TTFT & tok/s from your network
-  ${c.cyan('npx bf16 models')} [--json]                      List active models, context & /1M pricing
-  ${c.cyan('npx bf16 cost')}   [model] [--in=500000] [--out=25000] [--cache=0.8]
-  ${c.cyan('npx bf16 proxy')}  [--port=4160]                 Zero-logging local proxy with bf16/smart routing
-  ${c.cyan('npx bf16 referral')}                             Print shareable \`npx bf16 claude --ref=...\`
-  ${c.cyan('npx bf16 logout')}                               Remove local credentials (~/.bf16/credentials.json)
+  ${c.cyan('npx bf16ai login')} [--key <sk-...>] [--ref=<code>] Browser OAuth or API key login (0600)
+  ${c.cyan('npx bf16ai whoami')} / ${c.cyan('balance')} [--json]             Check live USD balance, tier & concurrency
+  ${c.cyan('npx bf16ai doctor')} [--json]                      Diagnose API key, latency & env conflicts
+  ${c.cyan('npx bf16ai bench')}  [--models=...] [--compare]    Measure real TTFT & tok/s from your network
+  ${c.cyan('npx bf16ai models')} [--json]                      List active models, context & /1M pricing
+  ${c.cyan('npx bf16ai cost')}   [model] [--in=500000] [--out=25000] [--cache=0.8]
+  ${c.cyan('npx bf16ai proxy')}  [--port=4160]                 Zero-logging local proxy with bf16/smart routing
+  ${c.cyan('npx bf16ai referral')}                             Print shareable \`npx bf16ai claude --ref=...\`
+  ${c.cyan('npx bf16ai logout')}                               Remove local credentials (~/.bf16/credentials.json)
 
 ${c.bold('EXAMPLES')}
-  ${c.dim('$')} npx bf16 claude
-  ${c.dim('$')} npx bf16 claude --fast -- -p "Audit this repo for auth bugs"
-  ${c.dim('$')} npx bf16 setup && npx bf16 doctor
-  ${c.dim('$')} npx bf16 bench --models=turbo,main
+  ${c.dim('$')} npx bf16ai claude
+  ${c.dim('$')} npx bf16ai claude --fast -- -p "Audit this repo for auth bugs"
+  ${c.dim('$')} npx bf16ai setup && npx bf16ai doctor
+  ${c.dim('$')} npx bf16ai bench --models=turbo,main
 
 Full illustrated guides for 34 clients: ${c.cyan(DOCS_CLIENTS_URL)}
 `);
@@ -326,19 +328,24 @@ async function main() {
 
     default:
       printErr(`Unknown command "${command}".`);
-      printInfo(`Run ${c.cyan('npx bf16 --help')} to see all available commands.`);
+      printInfo(`Run ${c.cyan('npx bf16ai --help')} to see all available commands.`);
       process.exitCode = 1;
   }
 }
 
-const isDirectRun =
-  process.argv[1] &&
-  (process.argv[1].endsWith('/bf16.mjs') ||
-    process.argv[1].endsWith('\\bf16.mjs') ||
-    process.argv[1].endsWith('/bf16') ||
-    process.argv[1].endsWith('\\bf16'));
+function isDirectExecution() {
+  if (!process.argv[1]) return false;
+  try {
+    return (
+      fs.realpathSync(process.argv[1]) ===
+      fs.realpathSync(fileURLToPath(import.meta.url))
+    );
+  } catch {
+    return false;
+  }
+}
 
-if (isDirectRun) {
+if (isDirectExecution()) {
   main().catch((err) => {
     printErr(err?.message || String(err));
     process.exitCode = 1;

@@ -386,7 +386,7 @@ export async function runLogin({
       printBalanceSummary(saved.me);
       if (result.ref) {
         printInfo(
-          `Share & earn credit: ${c.cyan(`npx bf16 claude --ref=${result.ref}`)}`
+          `Share & earn credit: ${c.cyan(`npx bf16ai claude --ref=${result.ref}`)}`
         );
       }
       return { apiKey: result.key, me: saved.me };
@@ -399,7 +399,7 @@ export async function runLogin({
 
   if (!process.stdin.isTTY) {
     throw new Error(
-      `No API key found. Run \`npx bf16 login --key <sk-bf16-...>\` or set BF16_API_KEY. Keys: ${KEYS_URL}`
+      `No API key found. Run \`npx bf16ai login --key <sk-bf16-...>\` or set BF16_API_KEY. Keys: ${KEYS_URL}`
     );
   }
 
@@ -454,7 +454,7 @@ export async function runWhoami({ flagKey = null, json = false } = {}) {
     }
     printHeader('whoami');
     printErr('Not logged in.');
-    printInfo(`Run ${c.cyan('npx bf16 login')} or set ${c.cyan('BF16_API_KEY')}.`);
+    printInfo(`Run ${c.cyan('npx bf16ai login')} or set ${c.cyan('BF16_API_KEY')}.`);
     process.exitCode = 1;
     return;
   }
@@ -487,7 +487,7 @@ export async function runWhoami({ flagKey = null, json = false } = {}) {
   }
   printBalanceSummary(me.data);
   if (resolved.referralCode) {
-    printInfo(`Referral command: ${c.cyan(`npx bf16 claude --ref=${resolved.referralCode}`)}`);
+    printInfo(`Referral command: ${c.cyan(`npx bf16ai claude --ref=${resolved.referralCode}`)}`);
   }
 }
 
@@ -510,15 +510,15 @@ export function runReferral({ code = null } = {}) {
   printHeader('referral', 'Invite friends to bf16.ai — they get +20% bonus on first top-up');
   if (!refCode) {
     printInfo(`Find your personal referral code at ${c.cyan(REFERRALS_URL)}`);
-    printInfo(`Or re-authenticate via ${c.cyan('npx bf16 login')} to sync it automatically.`);
+    printInfo(`Or re-authenticate via ${c.cyan('npx bf16ai login')} to sync it automatically.`);
     return;
   }
   console.log('');
   console.log(`  ${c.bold('One-command Claude Code invite:')}`);
-  console.log(`    ${c.cyan(`npx bf16 claude --ref=${refCode}`)}`);
+  console.log(`    ${c.cyan(`npx bf16ai claude --ref=${refCode}`)}`);
   console.log('');
   console.log(`  ${c.bold('One-command Auto-Setup invite:')}`);
-  console.log(`    ${c.cyan(`npx bf16 setup --ref=${refCode}`)}`);
+  console.log(`    ${c.cyan(`npx bf16ai setup --ref=${refCode}`)}`);
   console.log('');
   console.log(`  ${c.bold('Direct web link:')}`);
   console.log(`    ${c.cyan(`${APP_ORIGIN}/?ref=${refCode}`)}`);

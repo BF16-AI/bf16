@@ -95,7 +95,7 @@ export async function runModels({ flagKey = null, json = false } = {}) {
     )
   );
   console.log('');
-  printInfo(`Quick launch: ${c.cyan('npx bf16 claude')} or ${c.cyan('npx bf16 claude --fast')}`);
+  printInfo(`Quick launch: ${c.cyan('npx bf16ai claude')} or ${c.cyan('npx bf16ai claude --fast')}`);
   console.log('');
 }
 
