@@ -1,0 +1,52 @@
+{
+  "name": "bf16",
+  "version": "1.0.0",
+  "description": "Official CLI for bf16.ai — run Claude Code, Codex, OpenCode, Goose, Pi, and local agents on uncensored 1M-context models with one command.",
+  "license": "MIT",
+  "type": "module",
+  "author": "BF16 Team <hello@bf16.ai>",
+  "homepage": "https://bf16.ai",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BF16-AI/bf16.git"
+  },
+  "bugs": {
+    "url": "https://github.com/BF16-AI/bf16/issues"
+  },
+  "bin": {
+    "bf16": "bin/bf16.mjs"
+  },
+  "files": [
+    "bin/",
+    "src/",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=18.18.0"
+  },
+  "scripts": {
+    "test": "node --test test/*.test.mjs",
+    "start": "node bin/bf16.mjs"
+  },
+  "keywords": [
+    "bf16",
+    "bf16.ai",
+    "claude-code",
+    "codex",
+    "opencode",
+    "goose",
+    "pi",
+    "zed",
+    "openclaw",
+    "llm",
+    "ai",
+    "cli",
+    "uncensored",
+    "1m-context",
+    "anthropic",
+    "openai",
+    "mcp",
+    "zdr"
+  ]
+}
